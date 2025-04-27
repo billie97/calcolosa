@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatore Prima Casa - Web App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calcola il Costo Totale della Tua Prima Casa</h1>
+        <form id="costForm">
+            <label>Prezzo Casa (€):</label>
+            <input type="number" id="prezzo" required>
+
+            <label>Spese Notaio (€):</label>
+            <input type="number" id="notaio" required>
+
+            <label>Spese Agenzia (%):</label>
+            <input type="number" id="agenzia" value="3">
+
+            <label>Importo Mutuo (€):</label>
+            <input type="number" id="importoMutuo" required>
+
+            <label>Durata Mutuo (anni):</label>
+            <input type="number" id="durataMutuo" value="30">
+
+            <label>Tasso Interesse Annuo (%):</label>
+            <input type="number" id="tassoInteresse" value="2.5">
+
+            <button type="submit">Calcola Totale</button>
+        </form>
+
+        <div id="progressBar" class="hidden">
+            <div id="progress"></div>
+        </div>
+
+        <div id="risultato" class="hidden">
+            <h2>Risultato:</h2>
+            <p id="totaleFinale"></p>
+            <p id="rataMutuo"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
