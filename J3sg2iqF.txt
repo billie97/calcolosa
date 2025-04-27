@@ -1,0 +1,43 @@
+// script.js
+document.getElementById('costForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Mostra barra di progresso
+    document.getElementById('progressBar').classList.remove('hidden');
+    animateProgressBar();
+
+    const prezzo = parseFloat(document.getElementById('prezzo').value);
+    const notaio = parseFloat(document.getElementById('notaio').value);
+    const agenziaPercentuale = parseFloat(document.getElementById('agenzia').value);
+    const importoMutuo = parseFloat(document.getElementById('importoMutuo').value);
+    const durataMutuo = parseFloat(document.getElementById('durataMutuo').value);
+    const tassoInteresse = parseFloat(document.getElementById('tassoInteresse').value) / 100;
+
+    const speseAgenzia = (prezzo * agenziaPercentuale) / 100;
+    const impostaRegistro = (prezzo * 2) / 100; // agevolazione prima casa 2%
+    const totale = prezzo + notaio + speseAgenzia + impostaRegistro;
+
+    // Formula rata mutuo (annuale diviso 12 per rata mensile)
+    const tassoMensile = tassoInteresse / 12;
+    const numeroRate = durataMutuo * 12;
+    const rata = importoMutuo * (tassoMensile * Math.pow(1 + tassoMensile, numeroRate)) / (Math.pow(1 + tassoMensile, numeroRate) - 1);
+
+    setTimeout(() => {
+        document.getElementById('totaleFinale').innerHTML = `Il costo totale stimato (compreso imposta di registro) è <strong>€ ${totale.toFixed(2)}</strong>`;
+        document.getElementById('rataMutuo').innerHTML = `La rata mensile stimata del mutuo è <strong>€ ${rata.toFixed(2)}</strong>`;
+        document.getElementById('risultato').classList.remove('hidden');
+    }, 1000);
+});
+
+function animateProgressBar() {
+    let progress = document.getElementById('progress');
+    let width = 0;
+    let interval = setInterval(function() {
+        if (width >= 100) {
+            clearInterval(interval);
+        } else {
+            width++;
+            progress.style.width = width + '%';
+        }
+    }, 10);
+}
